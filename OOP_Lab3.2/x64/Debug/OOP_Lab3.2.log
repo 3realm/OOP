@@ -1,0 +1,41 @@
+﻿  DataBase.cpp
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(38,70): error C2511: int DataBase::get(char *,int,int): перегруженная функция-член не найдена в "DataBase"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(6): message : см. объявление "DataBase"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(39,17): error C2597: недопустимая ссылка на нестатический член "DataBase::fileName"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(9): message : см. объявление "DataBase::fileName"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(41,20): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(41,20): error C3867: "DataBase::stream": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(41,20): error C2568: ==: не удается разрешить перегрузку функции
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(48,27): warning C4305: инициализация: усечение из "int" в "char"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(48,23): warning C4309: инициализация: усечение константного значения
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(52,8): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(53,24): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(54,8): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(57,24): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(58,25): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(61,12): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(75,12): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(76,9): error C2597: недопустимая ссылка на нестатический член "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(8): message : см. объявление "DataBase::stream"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(89,2): error C2660: DataBase::get: функция не принимает 3 аргументов
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(15,6): message : см. объявление "DataBase::get"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.cpp(91,54): error C2660: DataBase::get: функция не принимает 3 аргументов
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(15,6): message : см. объявление "DataBase::get"
+  Executor.cpp
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\Executor.cpp(16,67): error C2660: DataBase::get: функция не принимает 3 аргументов
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(15,6): message : см. объявление "DataBase::get"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\Executor.cpp(23,62): error C2660: DataBase::get: функция не принимает 3 аргументов
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(15,6): message : см. объявление "DataBase::get"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\Executor.cpp(42,67): error C2660: DataBase::get: функция не принимает 3 аргументов
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(15,6): message : см. объявление "DataBase::get"
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\Executor.cpp(52,67): error C2660: DataBase::get: функция не принимает 3 аргументов
+C:\мои_документы\6102_020302D\ООП\Работа\OOP_Lab3.2\DataBase.h(15,6): message : см. объявление "DataBase::get"
+  OOP_Lab3.2.cpp
+  Создание кода...

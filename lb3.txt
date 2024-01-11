@@ -1,0 +1,169 @@
+#define _CRT_SECURE_NO_WARNINGS 
+#pragma once 
+#include <iostream> 
+#include <string.h> 
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <Windows.h>
+#define numOfStudents 20
+
+struct Student 
+{
+	unsigned kard; //номер зачетной книжки;
+	char name[21]; //фамилия студента
+};
+struct KardIndexFileData {
+	unsigned kard;
+	unsigned long key;//позиция студента в файле записей по данному номеру зачетной книжки
+};
+struct NameIndexFileData {
+	char name[21];
+	unsigned long key;//позиция студента в файле записей по данной фамилии
+};
+
+int CompareKards(const void* arg1, const void* arg2) {
+	return ((KardIndexFileData*)arg1)->kard - ((KardIndexFileData*)arg2)->kard;
+}
+
+int CompareNames(const void* arg1, const void* arg2) {
+	return strlen(((NameIndexFileData*)arg1)->name) - strlen(((NameIndexFileData*)arg2)->name);
+}
+class StudentsFile
+{
+private:
+	FILE* file;//указатель на поток файла записей
+	FILE* kardIndexFile;//указатель на первый индексированный файл
+	FILE* nameIndexFile;//указатель на второй индексированный файл
+public:
+	unsigned int count = 0;
+
+
+public:
+	StudentsFile()//создание и заполнение файла записей, первого и второго индексированных файлов
+	{
+		file = fopen("students.dat", "wb");
+		NameIndexFileData names[numOfStudents];
+		KardIndexFileData kards[numOfStudents];
+		Student student;
+
+		printf("Введите количество студентов для записи в файл(не более %d): ", numOfStudents);
+		scanf("%d", &count);
+		for (int i = 0; i < count; i++)
+		{
+			printf("Введите фамилию %d-го студента: ", i + 1);
+			scanf("%s", &names[i].name);
+			strcpy(student.name, names[i].name);
+
+			printf("Введите номер зачётной книжки %d-го студента: ", i + 1);
+			scanf("%d", &kards[i].kard);
+			student.kard = kards[i].kard;
+
+			names[i].key = kards[i].key = ftell(file);
+			fwrite(&student, sizeof(Student), 1, file);
+		}
+
+
+		qsort(kards, count, sizeof(KardIndexFileData),CompareKards);
+		kardIndexFile = fopen("kardIndexFile.dat", "wb");
+		for (int i = 0; i < count; i++)
+		{
+			fwrite(&kards[i].key, sizeof(long), 1, kardIndexFile);
+		}
+		fclose(kardIndexFile);
+
+
+		qsort((void*)names, count, sizeof(NameIndexFileData), (int(*) (const void*, const void*))CompareNames);
+		nameIndexFile = fopen("nameIndexFile.dat", "wb");
+		for (int i = 0; i < count; i++)
+		{
+			fwrite(&names[i].key, sizeof(long), 1, nameIndexFile);
+		}
+		fclose(nameIndexFile);
+
+
+		fclose(file);
+	};
+	void PrintName(unsigned kard)//поиск и вывод информации студента по заданному номеру зачетной книжки
+	{
+		kardIndexFile = fopen("kardIndexFile.dat", "rb");
+		file = fopen("students.dat", "rb");
+		KardIndexFileData kards[numOfStudents];
+		Student st;
+		for (int i = 0; i < count; i++)
+		{
+			fread(&kards[i].key, sizeof(long), 1, kardIndexFile);
+			fseek(file, kards[i].key, SEEK_SET);
+			fread(&st, sizeof(Student), 1, file);
+
+			kards[i].kard = st.kard;
+		}
+
+		KardIndexFileData searchKard;
+		searchKard.kard = kard;
+		KardIndexFileData* result = (KardIndexFileData*)bsearch(&searchKard, kards, count, sizeof(KardIndexFileData), CompareKards);
+		if (result == nullptr) {
+			printf("Нет записи студента с номером зачетной книжки %d", kard);
+		}
+		else {
+			fseek(file, result->key, SEEK_SET);
+			Student student;
+			fread(&student, sizeof(Student), 1, file);
+			printf("Фамилия студента с номером зачетной книжки %d: %s", student.kard, student.name);
+		}
+		puts("\n");
+		fclose(kardIndexFile);
+		fclose(file);
+	};
+	void PrintNamesSortedByLength()//вывод на экран упорядоченного по длинам списка всех фамилий студентов
+	{
+		nameIndexFile = fopen("nameIndexFile.dat", "rb");
+		file = fopen("students.dat", "rb");
+		Student student;
+		unsigned long key;
+		for (int i = 0; i < count; i++)
+		{
+			fread(&key, sizeof(long), 1, nameIndexFile);
+			fseek(file, key, SEEK_SET);
+			fread(&student, sizeof(Student), 1, file);
+			printf("Студент: %s\t\tНомер зачетной книжки: %u\n", student.name, student.kard);
+		}
+		puts("\n");
+		fclose(file);
+		fclose(nameIndexFile);
+	};
+
+};
+
+
+int main(void)
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	setlocale(0, "Russian");
+
+	puts("Лабораторная работа №3\nВыполнил: Иванов В. Д., группа 6102");
+	StudentsFile file;
+	int choice;
+	do {
+		puts("\tМеню");
+		puts("1 - Вывод на экран фамилии студента по заданному номеру зачетной книжки");
+		puts("2 - Вывод на экран упорядоченного по длинам списка всех фамилий студентов");
+		puts("0 - Выход");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 1:
+			printf("Введите номер зачетной книжки: ");
+			long kard;
+			scanf("%d", &kard);
+			file.PrintName(kard);
+			break;
+		case 2:
+			file.PrintNamesSortedByLength();
+			break;
+		default:
+			break;
+		}
+	} while (choice != 0);
+	system("pause");
+}
